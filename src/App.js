@@ -1,26 +1,25 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 
-class App extends Component {
+import {
+  HashRouter as Router,
+  Route
+} from 'react-router-dom'
+
+import './App.css';
+import LoginPageComponent from './components/LoginPage';
+import SelectPageComponent from './components/SelectPage';
+import ReadPageComponent from './components/ReadPage';
+
+class App extends React.Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Router>
+        <div id="root">
+          <Route exact path="/" component={LoginPageComponent} />
+          <Route path="/read" exact component={ReadPageComponent} />
+          <Route path="/select" exact component={SelectPageComponent} />
+        </div>
+      </Router>
     );
   }
 }

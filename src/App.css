@@ -1,33 +1,230 @@
-.App {
+html {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+body {
+  margin: 0 auto;
+  padding: 0;
+  font-family: sans-serif;
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+img {
+  width: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+li {
+  list-style: none;
+}
+
+h1, h2 {
+  font-weight: 500;
+}
+
+.master-root {
+  background: #e2e1e0;
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.inactive {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);  
+}
+
+.card {
+  background-size: cover;
+  position: absolute;
+  background: #ffffff;
+  height: 500px;
+  width: 500px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  border: 1px solid #c5c5c5;
+  margin: 10px auto;
+  border-radius: 5px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);  
+  cursor: pointer;
+}
+
+.content-styles {
+  padding: 40px 100px;
+  text-align: left;
+}
+
+p:first-child:first-letter {
+  float: left;
+  font-family: Georgia;
+  font-size: 75px;
+  line-height: 50px;
+  padding-top: 10px;
+  padding-right: 4px;
+  padding-left: 3px;
+}
+
+.card-body {
+  margin: auto 0;
+}
+
+.points {
+  display: flex;
+  font-family: 'Nunito', sans-serif;
+  float: right;
+  margin: 20px 10px;
+}
+
+.share-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.share-icon {
+  font-size: 36px;
+}
+
+.app-icons-row {
+  border-top: 1px solid #2e2e2e;
+  display: flex;
+  color: #2e2e2e;
+}
+
+.col-4 {
+  border: 1px solid #ffffff;
+  border-bottom: none;
+  padding: 20px 0;
+  width: 33.33%;
+}
+
+.card h2 {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  text-transform: uppercase;
+}
+
+.material-icons { 
+  color: green;
+  margin-right: 5px;
+}
+
+.points-text {
+  font-weight: 700;
+}
+
+.card p {
+  font-family: 'PT Serif', sans-serif;
+  font-size: 18px;
+}
+
+.animate {
+  transition: transform .3s;
+  box-shadow: none;
+}
+
+.inactive {
+  box-shadow: none;
+}
+
+.alert {
+  width: 45%;
+  min-height: 10%;
+  position: absolute;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity .5s;
   color: white;
+  vertical-align: middle;
+  line-height: 3rem;
 }
 
-.App-link {
-  color: #61dafb;
+.alert-visible {
+  opacity: 1;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.alert-right {
+  top: 0;
+  right: 0;
+  background: green;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
 }
+
+.alert-left {
+  top: 0;
+  left: 0;
+  background: red;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
+.alert-top {
+  background: purple;
+  border-radius: 50px;
+  transform: translate(-50%, 0);
+  margin-left: 50%;
+ }
+
+ .alert-bottom {
+  bottom: 0;
+  background: blue;
+  border-top-left-radius: 50px;
+  border-radius: 50px;
+  transform: translate(-50%, 0);
+  margin-left: 50%;
+ }
+
+ /* Login Page */
+ .container {
+   height: 80vh;
+ }
+
+ .login-card {
+  margin: 100px 30%;
+  width: 500px;
+  height: 500px;
+  cursor: pointer;
+  border: 1px solid #656565;
+  border-radius: 8px;
+ }
+
+ .app-name {
+  font-family: 'PT Serif', sans-serif;
+  font-size: 42px; 
+  font-weight: 700;
+ }
+
+ .login-form {
+   display: flex;
+   flex-direction: column;
+   padding: 100px 50px;
+ }
+
+ input {
+  height: 32px;
+  border-radius: 4px;
+  margin: 5px 0;
+ }
+
+ .login-button {
+   padding: 10px;
+   width: 200px;
+   border-radius: 8px;
+   font-size: 14px;
+   font-weight: 700;
+   background-color: green;
+   color: #ffffff;
+   text-transform: uppercase;
+ }
+
+ .select-interests {
+  text-align: left;
+  text-transform: uppercase;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+ }
