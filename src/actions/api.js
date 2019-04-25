@@ -20,6 +20,25 @@ function authenticate(credentials) {
     return req;
 }
 
+function getKeywords() {
+    let token = sessionStorage.getItem('token');
+
+    let req = axios({
+        method: 'GET',
+        mode: 'cors',
+        url: proxyurl + 'https://fool-me-thrice.appspot.com/api/v1/get_keywords',
+        cache: false,
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Access-Control-Allow-Origin': '*'
+          }
+    }).then(response => {
+        return response.data;
+    })
+
+    return req;
+}
+
 function fetchTopics() {
 
     let token = sessionStorage.getItem('token');
@@ -100,4 +119,4 @@ function updateTopics(topics) {
     return req;
 }
 
-export {authenticate, fetchTopics, updateTopics, getCards, updateScore};
+export {authenticate, fetchTopics, updateTopics, getCards, updateScore, getKeywords};
