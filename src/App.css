@@ -14,12 +14,74 @@ body {
   text-align: center;
 }
 
+.sentence-construct-container {
+  height: 200px;
+  padding: 5px;
+}
+
+.create-btn {
+  text-transform: uppercase;
+  height: 30px;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 8px 0;
+}
+
+.write-card-wrapper {
+  font-family: 'Nunito', sans-serif;
+}
+
+.create-btn-row {
+  justify-content: center;
+}
+
+.inputs-row {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+}
+
+.write-form-control {
+  width: 150px;
+  height: 30px;
+  font-weight: 700;
+}
+
+.keyword-select-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 200px;
+  margin: auto 0;
+  background: rgba(34,139,34,0.25);
+  border-top: 3px solid #2e2e2e;
+  border-bottom: 2px solid #2e2e2e;
+}
+
+.selector-btn-col {
+  margin: 3px 0;
+}
+
+.card-body-write {
+  height: 400px;
+}
+
 img {
   width: 100%;
 }
 
 li {
   list-style: none;
+}
+
+.selector-button {
+  margin: 0 2px;
+  border-radius: 0;
+  letter-spacing: 0.15px;
+  font-size: 16px;
+  width: 150px;
+  height: 35px;
+  font-weight: 700;
 }
 
 h1, h2 {
@@ -68,7 +130,7 @@ h1, h2 {
 
 p:first-child:first-letter {
   float: left;
-  font-family: Georgia;
+  font-family: 'PT Serif', serif;
   font-size: 75px;
   line-height: 50px;
   padding-top: 10px;
@@ -96,16 +158,26 @@ p:first-child:first-letter {
   font-size: 36px;
 }
 
+.card-header {
+  background: none;
+  font-family: 'PT Serif', serif;
+  font-weight: 700;
+}
+
+.card-footer {
+  background: none;
+}
+
 .app-icons-row {
+  height: 50px;
   border-top: 1px solid #2e2e2e;
   display: flex;
   color: #2e2e2e;
 }
 
 .col-4 {
-  border: 1px solid #ffffff;
-  border-bottom: none;
-  padding: 20px 0;
+  height: 100%;
+  padding: 4px 0;
   width: 33.33%;
 }
 
@@ -219,6 +291,31 @@ p:first-child:first-letter {
   margin: 5px 0;
  }
 
+ .card-body-dashboard {
+   height: 400px;
+ }
+
+ .number-col-db {
+   font-family: 'Nunito', sans-serif;
+   color: green;
+   font-weight: 700;
+   text-align: left;
+ }
+
+ .text-col-db {
+   font-family: 'Nunito', sans-serif;
+   text-align: left;
+   letter-spacing: -0.25px;
+ }
+
+ .row-header-db {
+   font-family: 'Nunito', sans-serif;
+   text-transform: uppercase;
+   font-size: 12px;
+   font-weight: 700;
+   color: #656565;
+ }
+
  .login-button {
    padding: 10px;
    width: 200px;
@@ -229,6 +326,18 @@ p:first-child:first-letter {
    color: #ffffff;
    text-transform: uppercase;
  }
+
+ .signup-button {
+  padding: 10px;
+  width: 200px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  background-color: #ffffff;
+  border: 2px solid green;
+  color: green;
+  text-transform: uppercase;
+}
 
  .select-interests {
   text-align: left;

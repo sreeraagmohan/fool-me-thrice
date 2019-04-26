@@ -1,6 +1,6 @@
 import React from 'react';
 import {withRouter} from 'react-router';
-import Chips, { Chip } from 'react-chips';
+import Chips from 'react-chips';
 
 import { fetchTopics, updateTopics } from '../actions/api';
 

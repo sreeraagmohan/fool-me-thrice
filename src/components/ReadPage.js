@@ -49,6 +49,12 @@ class ReadPageComponent extends React.Component {
     this.props.history.push('/write');
   }
 
+
+  // Navigate to Dashboard
+  navigateToDashboard() {
+    this.props.history.push('/dashboard');
+  }
+
   // Handle the swipe action
   handleSwipe(dir, card, position) {
     if (dir === 'end') {
@@ -59,7 +65,7 @@ class ReadPageComponent extends React.Component {
         upvotes: ''
       };
       this.setState({ ...this.state, cards: this.state.cards.push(endcard) });
-    } else if ((card.id > 0) && (dir !== card.fake)) {
+    } else if ((card.id > 0) && (dir === card.fake)) {
       let error_card = {
         id: -2,
         description: 'You got fooled by the propaganda machine!',
@@ -78,7 +84,7 @@ class ReadPageComponent extends React.Component {
       temp.splice(position + 1, 0, error_card);
 
       this.setState({ ...this.state, cards: temp });
-    } else if ((card.id > 0) && (dir === card.fake)) {
+    } else if ((card.id > 0) && (dir !== card.fake)) {
       let positive_card = {
         id: -3,
         description: "You're right! What a player!",
@@ -144,7 +150,7 @@ class ReadPageComponent extends React.Component {
                           <i className="material-icons share-icon">share</i>
                         </div>
                       </div>
-                      <div className="card-footer">
+                      <div className="my-card-footer">
                         <div className="app-icons-row">
                           <div className="col-4">
                             <img width="40" height="40" src={ReadBlackLogo} alt="Read Logo" />
@@ -161,6 +167,7 @@ class ReadPageComponent extends React.Component {
                   }
                   {x.id === -3 &&                     
                     <div>
+                      <div className="card-header"></div>
                       <div className="card-body-anim">
                         <Lottie options={correctAnimationOptions}
                           height={300}
@@ -168,12 +175,12 @@ class ReadPageComponent extends React.Component {
                         /> 
                         <p className="content-styles-anim">{x.description}</p>
                       </div>
-                      <div className="card-footer">
+                      <div className="my-card-footer">
                         <div className="app-icons-row">
                           <div className="col-4">
                             <img width="40" height="40" src={ReadBlackLogo} alt="Read Logo" />
                           </div>
-                          <div className="col-4">
+                          <div onClick={(e) => this.navigateToDashboard()} className="col-4">
                             <img width="40" height="40" src={DashboardLogo} alt="Dashboard Logo" />
                           </div>
                           <div onClick={(e) => this.navigateToWrite()} className="col-4">
@@ -185,6 +192,7 @@ class ReadPageComponent extends React.Component {
                   }
                   {x.id === -2 &&                     
                     <div>
+                      <div className="card-header"></div>
                       <div className="card-body-anim">
                         <Lottie 
                           options={incorrectAnimationOptions}
@@ -193,7 +201,7 @@ class ReadPageComponent extends React.Component {
                         /> 
                         <p className="content-styles-anim">{x.description}</p>
                       </div>
-                      <div className="card-footer">
+                      <div className="my-card-footer">
                         <div className="app-icons-row">
                           <div className="col-4">
                             <img width="40" height="40" src={ReadBlackLogo} alt="Read Logo" />

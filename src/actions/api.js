@@ -20,6 +20,22 @@ function authenticate(credentials) {
     return req;
 }
 
+function createUser(credentials) {
+    let req = axios({
+        method: 'POST',
+        data: credentials,
+        url: proxyurl + 'https://fool-me-thrice.appspot.com/api/create_user',
+        cache: false,
+        headers: {
+            'Access-Control-Allow-Origin': '*'
+          }
+    }).then(response => {
+        return response;
+    })
+
+    return req;
+}
+
 function getKeywords() {
     let token = sessionStorage.getItem('token');
 
@@ -98,6 +114,47 @@ function updateScore(data) {
     return req;
 }
 
+function createCard(request) {
+  
+    let token = sessionStorage.getItem('token');
+
+    let req = axios({
+        method: 'POST',
+        mode: 'cors',
+        data: request,
+        url: proxyurl + 'https://fool-me-thrice.appspot.com/api/v1/create_card',
+        cache: false,
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Access-Control-Allow-Origin': '*'
+          }
+    }).then(response => {
+        return response;
+    })
+
+    return req;  
+}
+
+function getStats() {
+  
+    let token = sessionStorage.getItem('token');
+
+    let req = axios({
+        method: 'GET',
+        mode: 'cors',
+        url: proxyurl + 'https://fool-me-thrice.appspot.com/api/v1/statistics',
+        cache: false,
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Access-Control-Allow-Origin': '*'
+          }
+    }).then(response => {
+        return response.data;
+    })
+
+    return req;  
+}
+
 function updateTopics(topics) {
 
     let token = sessionStorage.getItem('token');
@@ -119,4 +176,13 @@ function updateTopics(topics) {
     return req;
 }
 
-export {authenticate, fetchTopics, updateTopics, getCards, updateScore, getKeywords};
+export {
+        authenticate, 
+        fetchTopics, 
+        updateTopics, 
+        getCards, 
+        createCard,
+        getStats,
+        createUser,
+        updateScore, 
+        getKeywords};

@@ -9,6 +9,7 @@ import './App.css';
 import LoginPageComponent from './components/LoginPage';
 import SelectPageComponent from './components/SelectPage';
 import ReadPageComponent from './components/ReadPage';
+import DashboardPageComponent from './components/DashboardPage';
 import WritePageComponent from './components/WritePage';
 
 class App extends React.Component {
@@ -19,6 +20,7 @@ class App extends React.Component {
           <Route exact path="/" component={LoginPageComponent} />
           <Route path="/read" exact component={ReadPageComponent} />
           <Route path="/write" exact component={WritePageComponent} />
+          <Route path="/dashboard" exact component={DashboardPageComponent} />
           <Route path="/select" exact component={SelectPageComponent} />
         </div>
       </Router>
