@@ -49,7 +49,6 @@ class ReadPageComponent extends React.Component {
     this.props.history.push('/write');
   }
 
-
   // Navigate to Dashboard
   navigateToDashboard() {
     this.props.history.push('/dashboard');
@@ -155,7 +154,7 @@ class ReadPageComponent extends React.Component {
                           <div className="col-4">
                             <img width="40" height="40" src={ReadBlackLogo} alt="Read Logo" />
                           </div>
-                          <div className="col-4">
+                          <div onClick={(e) => this.navigateToDashboard()} className="col-4">
                             <img width="40" height="40" src={DashboardLogo} alt="Dashboard Logo" />
                           </div>
                           <div onClick={(e) => this.navigateToWrite()} className="col-4">
