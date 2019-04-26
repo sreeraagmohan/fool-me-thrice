@@ -62,6 +62,13 @@ class WritePageComponent extends React.Component {
     this.renderSentenceConstruct();
   }
 
+  handleRemoveWord = (word) => {
+    let x = this.state.selectedWords;
+    x = x.filter(item => item !== word)
+    this.setState({ ...this.state, selectedWords: x });
+    this.renderSentenceConstruct();
+  }
+
   handleInputChange = (index, position, input) => {
 
     let x = this.state[`row${index}`];
@@ -117,7 +124,7 @@ class WritePageComponent extends React.Component {
           <div  key={index}>
             <div className="row inputs-row">
               <input value={this.state[`row${index}[0]`]} onChange={(e) => this.handleInputChange(index, 0, e.target.value)} className="form-control write-form-control" type="text"></input>
-              <button className="btn btn-dark selector-button">{word}</button>
+              <button onClick={() => this.handleRemoveWord(word)} className="btn btn-dark selector-button">{word}</button>
               <input value={this.state[`row${index}[2]`]} onChange={(e) => this.handleInputChange(index, 2, e.target.value)} className="form-control write-form-control" type="text"></input>
             </div>
             {index > 1 &&

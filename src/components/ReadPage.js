@@ -56,6 +56,7 @@ class ReadPageComponent extends React.Component {
 
   // Handle the swipe action
   handleSwipe(dir, card, position) {
+    
     if (dir === 'end') {
       let endcard =
       {
@@ -83,6 +84,7 @@ class ReadPageComponent extends React.Component {
       temp.splice(position + 1, 0, error_card);
 
       this.setState({ ...this.state, cards: temp });
+
     } else if ((card.id > 0) && (dir !== card.fake)) {
       let positive_card = {
         id: -3,
@@ -108,7 +110,7 @@ class ReadPageComponent extends React.Component {
   render() {
 
     const correctAnimationOptions = {
-      loop: true,
+      loop: false,
       autoplay: true, 
       animationData: correctAnimation,
       rendererSettings: {
@@ -117,7 +119,7 @@ class ReadPageComponent extends React.Component {
     };
 
     const incorrectAnimationOptions = {
-      loop: true,
+      loop: false,
       autoplay: true, 
       animationData: incorrectAnimation,
       rendererSettings: {
