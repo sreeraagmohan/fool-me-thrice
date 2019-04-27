@@ -25,7 +25,9 @@ class ReadPageComponent extends React.Component {
 
     this.state = {
       isSwiped: false,
-      cards: []
+      cards: [],
+      currentCard: {},
+      currentIndex: 0
     }
 
     getCards()
@@ -37,11 +39,19 @@ class ReadPageComponent extends React.Component {
               description: 'Come back again to check new cards!',
               upvotes: ''
             }];
-          this.setState({ ...this.state, cards: endcard });
+          this.setState({ ...this.state, cards: endcard, currentCard: endcard });
         } else {
-          this.setState({ ...this.state, cards: response })
+          this.setState({ ...this.state, cards: response, currentCard: response[0]})
         }
       });
+  }
+
+
+  componentDidMount() {
+    document.addEventListener("keydown", this.handleKeyPress, false);
+  }
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.handleKeyPress, false);
   }
 
   // Navigate to Write
@@ -54,9 +64,19 @@ class ReadPageComponent extends React.Component {
     this.props.history.push('/dashboard');
   }
 
+  // Handle the keyboard actions, left & right
+  handleKeyPress = (event) => {
+    console.log(event.keyCode, 'x');
+    if (event.keyCode === 37) {
+      this.handleSwipe(false, this.state.currentCard, this.state.currentIndex);
+    } else if (event.keyCode === 39) {
+      this.handleSwipe(true, this.state.currentCard, this.state.currentIndex);
+    }
+  }
+
   // Handle the swipe action
   handleSwipe(dir, card, position) {
-    
+    console.log(dir, card, position);
     if (dir === 'end') {
       let endcard =
       {
@@ -66,6 +86,7 @@ class ReadPageComponent extends React.Component {
       };
       this.setState({ ...this.state, cards: this.state.cards.push(endcard) });
     } else if ((card.id > 0) && (dir === card.fake)) {
+      console.log('came here');
       let error_card = {
         id: -2,
         description: 'You got fooled by the propaganda machine!',
@@ -86,6 +107,7 @@ class ReadPageComponent extends React.Component {
       this.setState({ ...this.state, cards: temp });
 
     } else if ((card.id > 0) && (dir !== card.fake)) {
+      console.log('came here too');
       let positive_card = {
         id: -3,
         description: "You're right! What a player!",
@@ -105,6 +127,12 @@ class ReadPageComponent extends React.Component {
       updateScore(body)
         .then(response => response);
     }
+
+    this.setState({
+      ...this.state,
+      currentCard: card,
+      currentIndex: position
+    })
   }
 
   render() {

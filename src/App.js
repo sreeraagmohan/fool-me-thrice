@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom'
 
 import './App.css';
+import 'react-toastify/dist/ReactToastify.css';
 import LoginPageComponent from './components/LoginPage';
 import SelectPageComponent from './components/SelectPage';
 import ReadPageComponent from './components/ReadPage';

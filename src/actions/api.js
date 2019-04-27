@@ -15,8 +15,9 @@ function authenticate(credentials) {
     }).then(response => {
         sessionStorage.setItem('token', response.data.auth_token);
         return response;
+    }).catch(err => {
+        return {status: 401, error: 'Invalid Credentials'};
     })
-
     return req;
 }
 
@@ -30,7 +31,7 @@ function createUser(credentials) {
             'Access-Control-Allow-Origin': '*'
           }
     }).then(response => {
-        return response;
+        return response.data;
     })
 
     return req;

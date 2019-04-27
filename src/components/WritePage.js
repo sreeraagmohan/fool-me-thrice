@@ -10,6 +10,7 @@ import ReadLogo from '../assets/read.svg';
 import WriteBlackLogo from '../assets/write-black.svg';
 
 import '../App.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 class WritePageComponent extends React.Component {
 
@@ -113,7 +114,14 @@ class WritePageComponent extends React.Component {
     }
 
     createCard(body)
-      .then(res => this.resetStates());
+      .then(res => {
+        if (res.status === 200) {
+          toast.success('Your card was created successfully:' + res.data.description, {
+            position: toast.POSITION.BOTTOM_RIGHT
+          })
+          this.resetStates();
+        }
+      });
 
   }
 
@@ -182,6 +190,7 @@ class WritePageComponent extends React.Component {
             </Card>
           )}
         </Cards>
+        <ToastContainer/>
       </div>
     )
   }
