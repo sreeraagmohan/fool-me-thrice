@@ -19,6 +19,8 @@ class ReadPageComponent extends React.Component {
   constructor() {
     super();
 
+    this.cardRef = null;
+
     if (!(sessionStorage.getItem('token'))) {
       this.props.history.push('/');
     }
@@ -66,17 +68,20 @@ class ReadPageComponent extends React.Component {
 
   // Handle the keyboard actions, left & right
   handleKeyPress = (event) => {
-    console.log(event.keyCode, 'x');
-    if (event.keyCode === 37) {
+    if (event.keyCode === 37 || event.keyCode === 65) {
+      this.cardRef.removeCard('Left', 0);
       this.handleSwipe(false, this.state.currentCard, this.state.currentIndex);
-    } else if (event.keyCode === 39) {
+    } else if (event.keyCode === 39 || event.keyCode === 68) {
+      this.cardRef.removeCard('Right', 0);
       this.handleSwipe(true, this.state.currentCard, this.state.currentIndex);
     }
   }
 
   // Handle the swipe action
   handleSwipe(dir, card, position) {
-    console.log(dir, card, position);
+
+    let temp = this.state.cards;
+
     if (dir === 'end') {
       let endcard =
       {
@@ -86,7 +91,6 @@ class ReadPageComponent extends React.Component {
       };
       this.setState({ ...this.state, cards: this.state.cards.push(endcard) });
     } else if ((card.id > 0) && (dir === card.fake)) {
-      console.log('came here');
       let error_card = {
         id: -2,
         description: 'You got fooled by the propaganda machine!',
@@ -101,23 +105,16 @@ class ReadPageComponent extends React.Component {
       updateScore(body)
         .then(response => response);
 
-      let temp = this.state.cards;
       temp.splice(position + 1, 0, error_card);
 
-      this.setState({ ...this.state, cards: temp });
-
     } else if ((card.id > 0) && (dir !== card.fake)) {
-      console.log('came here too');
       let positive_card = {
         id: -3,
         description: "You're right! What a player!",
         upvotes: ''
       };
 
-      let temp = this.state.cards;
       temp.splice(position + 1, 0, positive_card);
-
-      this.setState({ ...this.state, cards: temp });
 
       let body = {
         card_id: card.id,
@@ -128,11 +125,12 @@ class ReadPageComponent extends React.Component {
         .then(response => response);
     }
 
-    this.setState({
-      ...this.state,
-      currentCard: card,
-      currentIndex: position
-    })
+    this.setState(
+      { ...this.state,
+        currentCard: temp[position + 1],
+        currentIndex: position + 1, 
+        cards: temp 
+      });
   }
 
   render() {
@@ -158,7 +156,9 @@ class ReadPageComponent extends React.Component {
     return (
       <div>
         {this.state.isSwiped === false &&
-          <Cards className='master-root'>
+          <Cards 
+            ref={instance => this.cardRef = instance}
+            className='master-root'>
             {this.state.cards.map((x, index) =>
                 <Card
                   key={x.id}
