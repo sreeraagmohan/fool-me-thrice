@@ -1,6 +1,6 @@
 import React from 'react';
 import Cards, { Card } from 'react-swipe-card';
-import Lottie from 'react-lottie'
+import Lottie from 'react-lottie';
 import correctAnimation from '../assets/lottie-files/433-checked-done.json';
 import incorrectAnimation from '../assets/lottie-files/4386-connection-error.json';
 

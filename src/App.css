@@ -340,3 +340,59 @@ p:first-child:first-letter {
   font-family: 'Nunito', sans-serif;
   font-weight: 700;
  }
+
+ /* Modal Dialog CSS */
+ .modal-backdrop {
+   background: none;
+ }
+
+ .modal-dialog {
+   max-width: 350px;
+   margin: 11rem auto;
+ }
+
+ .modal-content {
+   min-height: 150px;
+ }
+
+ .modal-header {
+   background-color: #2e2e2e;
+   height: 24px;
+ }
+
+ .modal-title {
+  font-size: 1rem;
+  text-transform: uppercase;
+  margin-bottom: 0;
+  line-height: 0;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  color: #fff;
+ }
+
+ .modal-body {
+   font-family: 'Nunito', sans-serif;
+ }
+
+ .modal-footer {
+  height: 24px;
+  font-family: 'Nunito', sans-serif;
+  text-transform: uppercase;
+  justify-content: space-between;
+  background-color: #2e2e2e;
+ }
+
+ .btn-default {
+   font-family: 'Nunito', sans-serif;
+   font-weight: 700;
+   color: #ffffff;
+  }
+
+  .btn-default:hover {
+    color: #ffffff;
+    text-decoration: underline;
+  }
+
+  .refresh-icon {
+    color: #2e2e2e;
+  }

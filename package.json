@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "react": "15.4.2",
+    "react-bootstrap": "0.32.4",
     "react-chips": "^0.8.0",
     "react-dom": "15.4.2",
     "react-lottie": "^1.2.3",

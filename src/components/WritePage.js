@@ -1,5 +1,6 @@
 import React from 'react';
-import Cards, { Card } from 'react-swipe-card'
+import Cards, { Card } from 'react-swipe-card';
+import { Modal, Button } from 'react-bootstrap';
 
 import { getKeywords, createCard } from '../actions/api';
 import { withRouter } from 'react-router';
@@ -10,7 +11,7 @@ import ReadLogo from '../assets/read.svg';
 import WriteBlackLogo from '../assets/write-black.svg';
 
 import '../App.css';
-import { ToastContainer, toast } from 'react-toastify';
+
 
 class WritePageComponent extends React.Component {
 
@@ -25,7 +26,9 @@ class WritePageComponent extends React.Component {
       selectedWords: [],
       row0: ['', '', ''],
       row1: ['', '', ''],
-      row2: ['', '', '']
+      row2: ['', '', ''],
+      showConfirmModal: false,
+      showSuccessModal: false
     }
 
     if (!(sessionStorage.getItem('token'))) {
@@ -84,11 +87,25 @@ class WritePageComponent extends React.Component {
   resetStates = () => {
     this.setState({
       ...this.state,
+      showConfirmModal: false,
+      showSuccessModal: false,
       selectedWords: [],
       row0: ['', '', ''],
       row1: ['', '', ''],
       row2: ['', '', '']
     })
+
+    // Get new words from the API
+    getKeywords()
+    .then(res => {
+      this.setState({
+        ...this.state,
+        topic_id: res.topic.id,
+        subjects: res.subjects.map(x => x.name),
+        verbs: res.verbs.map(x => x.name),
+        victims: res.victims.map(x => x.name)
+      })
+    });
   }
 
   createFakeCard = () => {
@@ -106,30 +123,43 @@ class WritePageComponent extends React.Component {
     // Concatenate all words and build the string
     let x = this.state.row0.concat(this.state.row1, this.state.row2);
     x = x.join(' ');
+    this.setState({
+      ...this.state,
+      currentSentence: x
+    });
+
+    this.setState({
+      ...this.state,
+      showConfirmModal: true
+    });
+  }
+
+  handleSubmit = () => {
+
+    this.showConfirmModal = false;
 
     let body = {
       topic_id: this.state.topic_id,
-      description: x,
+      description: this.state.currentSentence,
       fake: true
     }
 
     createCard(body)
       .then(res => {
         if (res.status === 200) {
-          toast.success('Your card was created successfully:' + res.data.description, {
-            position: toast.POSITION.BOTTOM_RIGHT
+          this.setState({
+            ...this.state,
+            showSuccessModal: true
           })
-          this.resetStates();
         }
       });
-
   }
 
   renderSentenceConstruct() {
     return (
       this.state.selectedWords.map((word, index) => {
         return (
-          <div  key={index}>
+          <div key={index}>
             <div className="row inputs-row">
               <input value={this.state[`row${index}[0]`]} onChange={(e) => this.handleInputChange(index, 0, e.target.value)} className="form-control write-form-control" type="text"></input>
               <button onClick={() => this.handleRemoveWord(word)} className="btn btn-dark selector-button">{word}</button>
@@ -169,6 +199,11 @@ class WritePageComponent extends React.Component {
                   </div>
                   <div className="keyword-select-container">
                     <div className="row">
+                      <div onClick={() => this.resetStates()} className="col-1 ml-1">
+                        <i className="material-icons refresh-icon">refresh</i>
+                      </div>
+                    </div>
+                    <div className="row">
                       {this.renderKeywords()}
                     </div>
                   </div>
@@ -190,7 +225,29 @@ class WritePageComponent extends React.Component {
             </Card>
           )}
         </Cards>
-        <ToastContainer/>
+        <Modal animation={false} show={this.state.showConfirmModal} onHide={() => this.setState({...this.state, showConfirmModal: false})}>
+          <Modal.Header>
+            <Modal.Title>Confirm your card</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {this.state.currentSentence}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={() => this.setState({...this.state, showConfirmModal: false})}>Cancel</Button>
+            <Button onClick={() => this.handleSubmit()}>Create Card</Button>
+          </Modal.Footer>
+        </Modal>
+        <Modal animation={false} show={this.state.showSuccessModal} onHide={() => this.setState({...this.state, showSuccessModal: false})}>
+          <Modal.Header>
+            <Modal.Title>New card created</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {this.state.currentSentence}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={() => this.resetStates()}>Okay</Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     )
   }
